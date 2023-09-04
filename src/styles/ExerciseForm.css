@@ -1,0 +1,25 @@
+.container {
+  /* background-color: var(--light); */
+  background-color: var(--medBlue);
+  padding: 40px;
+  text-align: center;
+  max-width: 100vw;
+  height: 100%;
+}
+.formH2 {
+  padding: 25px;
+  font-size: 2rem;
+  font-weight: 600;
+}
+.returnSubmit {
+  margin-bottom: 20px;
+}
+form {
+  margin-top: 20px;
+  /* background: #bccad6; */
+  background-color: var(--light);
+  /* background-color: var(--medBlue); */
+  border: 1px solid black;
+  border-radius: 2%;
+  box-shadow: 4px 5px 5px grey;
+}

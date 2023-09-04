@@ -1,0 +1,28 @@
+:root {
+  --beige: #f1e3dd;
+  --light-blue: #bccad6;
+  --medium-blue: #8d9db6;
+  --dark-blue: #667292;
+
+  --light: #eaece5;
+
+  --medBlue: #b2c2bf;
+
+  --lightBlue: #c0ded9;
+
+  --dark: #3b3a30;
+}
+
+* {
+  box-sizing: border-box;
+  font-family: 'PT Sans', sans-serif;
+}
+
+.page-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+.content {
+  flex: 1;
+}
