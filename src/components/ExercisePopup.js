@@ -4,7 +4,12 @@ const ExercisePopup = ({ showPopup, onSave, onCancel, setNewExercise }) => {
   const handleInputChange = (e) => {
     setNewExercise(e.target.value);
   };
-
+  const handleInputKeyDown = (e) => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      onSave();
+    }
+  };
   return (
     showPopup && (
       <div className="popup-container">
@@ -15,6 +20,7 @@ const ExercisePopup = ({ showPopup, onSave, onCancel, setNewExercise }) => {
             type="text"
             placeholder="Enter Exercise"
             onChange={handleInputChange}
+            onKeyDown={handleInputKeyDown}
           />
           <button className="btn btn-light" onClick={onCancel}>
             Cancel
