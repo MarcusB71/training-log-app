@@ -1,14 +1,23 @@
 import React, { useState } from 'react';
 import DatePicker from 'react-datepicker';
 import ExercisePopup from './ExercisePopup';
+import DelExercisePopup from './DelExercisePopup';
 import 'react-datepicker/dist/react-datepicker.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../styles/ExerciseForm.css';
 import DisplayLogs from './DisplayLogs';
 const ExerciseForm = () => {
-  //default list of exercises (User will be able to add to it)
-  const initialExerciseList = ['Squat', 'Bench Press', 'Deadlift'];
-
+  //users list of exercises with a default
+  let initialExerciseList;
+  try {
+    initialExerciseList = JSON.parse(localStorage.getItem('exerciseList')) || [
+      'Squat',
+      'Bench Press',
+      'Deadlift',
+    ];
+  } catch (error) {
+    console.error('Error parsing exerciseList from local storage', error);
+  }
   //date display options
   const dateOptions = {
     month: 'long',
@@ -23,33 +32,33 @@ const ExerciseForm = () => {
     reps: 0,
     notes: '',
   };
-  //display hooks
+  //DISPLAY HOOKS
   const [showForm, setShowForm] = useState(false);
   const [displayCal, setCalVisible] = useState(true);
   const [displayLog, setLogVisible] = useState(false);
-  //form data member hooks
+  const [showPopup, setShowPopup] = useState(false);
+  const [showDelPopup, setShowDelPopup] = useState(false);
+  //FORM DATA MEMBER HOOKS
   const [date, setDate] = useState(new Date());
   const [formData, setFormData] = useState(initialFormData);
-  //exercise list hooks
-  const [showPopup, setShowPopup] = useState(false);
+  //EXERCISE LIST HOOKS
   const [exerciseList, setExerciseList] = useState(initialExerciseList);
   const [newExercise, setNewExercise] = useState('');
 
-  //event handlers
-  const handleConfirm = () => {
-    setCalVisible(false);
-    setShowForm(true);
-    setLogVisible(true);
-  };
-  const handleReturn = () => {
-    setCalVisible(true);
-    setShowForm(false);
-    setLogVisible(false);
-  };
+  //EXERCISE LIST FUNCTIONS
   const handleSaveExercise = () => {
     if (newExercise.trim !== '') {
       setNewExercise('');
       setExerciseList((exerciseList) => [...exerciseList, newExercise]);
+    }
+    try {
+      const existingExercises =
+        JSON.parse(localStorage.getItem('exerciseList')) || initialExerciseList;
+      const updatedExerciseList = [...existingExercises, newExercise];
+      localStorage.setItem('exerciseList', JSON.stringify(updatedExerciseList));
+      setExerciseList(updatedExerciseList);
+    } catch (err) {
+      console.error('Error retrieving exerciseList from local storage', err);
     }
     setShowPopup(false);
   };
@@ -57,17 +66,27 @@ const ExerciseForm = () => {
     setNewExercise('');
     setShowPopup(false);
   };
+  const handleDeleteExercise = (index) => {
+    try {
+      const existingExerciseList = JSON.parse(
+        localStorage.getItem('exerciseList')
+      );
+      const updatedExerciseList = [...existingExerciseList];
+      updatedExerciseList.splice(index, 1);
+      localStorage.setItem('exerciseList', JSON.stringify(updatedExerciseList));
+      setExerciseList(updatedExerciseList);
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  //FORM HANDLERS
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((formData) => ({ ...formData, [name]: value }));
-    console.log('onchange formdata:');
-    console.log(formData);
   };
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log('onsubmit formdata:');
-    console.log(formData);
-    //try saving formData to local storage
     try {
       const commonDate = date.toISOString().split('T')[0];
       formData.date = commonDate;
@@ -84,19 +103,17 @@ const ExerciseForm = () => {
     } catch (error) {
       console.error('Error saving form data to local storage', error);
     }
-    try {
-      const existingExercises =
-        JSON.parse(localStorage.getItem('exerciseList')) || [];
-      const updatedExerciseList = {
-        ...existingExercises,
-        newExercise,
-      };
-      localStorage.setItem('exerciseList', JSON.stringify(updatedExerciseList));
-    } catch (error) {
-      console.error('Error retrieving exerciseList from local storage', error);
-    }
   };
-
+  const handleConfirm = () => {
+    setCalVisible(false);
+    setShowForm(true);
+    setLogVisible(true);
+  };
+  const handleReturn = () => {
+    setCalVisible(true);
+    setShowForm(false);
+    setLogVisible(false);
+  };
   return (
     <>
       <div className="container text-center">
@@ -164,7 +181,7 @@ const ExerciseForm = () => {
                       </button>
                       <button
                         type="button"
-                        // onClick={() =>setShowDelPopup(true)}
+                        onClick={() => setShowDelPopup(true)}
                         className="btn btn-light"
                       >
                         -
@@ -264,6 +281,12 @@ const ExerciseForm = () => {
                   onCancel={handleCancelExercise}
                   setNewExercise={setNewExercise}
                 ></ExercisePopup>
+                <DelExercisePopup
+                  setShowDelPopup={setShowDelPopup}
+                  handleDeleteExercise={handleDeleteExercise}
+                  showDelPopup={showDelPopup}
+                  exerciseList={exerciseList}
+                ></DelExercisePopup>
               </div>
             </div>
           </div>
