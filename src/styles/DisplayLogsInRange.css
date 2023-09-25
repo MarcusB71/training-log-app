@@ -1,0 +1,23 @@
+.workout-card-container {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.workout-card {
+  border: 1px solid #ccc;
+  background: var(--light);
+  width: 270px;
+  margin: 10px;
+  border-radius: 15px;
+}
+.exerciseMonthly {
+  margin: 0px;
+}
+
+.react-datepicker-popper {
+  position: inherit;
+}
+h1 {
+  font-weight: bold;
+}
