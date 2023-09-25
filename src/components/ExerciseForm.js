@@ -5,7 +5,7 @@ import DelExercisePopup from './DelExercisePopup';
 import 'react-datepicker/dist/react-datepicker.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../styles/ExerciseForm.css';
-import DisplayLogs from './DisplayLogs';
+import CurrentSessionLogs from './CurrentSessionLogs';
 const ExerciseForm = () => {
   //users list of exercises with a default
   let initialExerciseList;
@@ -141,7 +141,7 @@ const ExerciseForm = () => {
                   <p
                     style={{
                       margin: '5px 0px 0px 0px',
-                      fontSize: '20px',
+                      fontSize: '24px',
                       fontWeight: 'bold',
                     }}
                   >
@@ -291,7 +291,7 @@ const ExerciseForm = () => {
             </div>
           </div>
         )}{' '}
-        {displayLog && <DisplayLogs curDate={date}></DisplayLogs>}
+        {displayLog && <CurrentSessionLogs curDate={date}></CurrentSessionLogs>}
       </div>
     </>
   );
