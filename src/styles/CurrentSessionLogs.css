@@ -1,0 +1,49 @@
+.logsHeading {
+  margin: 25px 0px 15px 0px;
+  font-weight: bold;
+}
+.logs-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex;
+  text-align: center;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  max-width: 300px;
+  margin: 0px auto 0px auto;
+  background-color: var(--light);
+}
+.log-entry {
+  padding: 2px;
+  border: 1px solid #ccc;
+}
+.date {
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 5px;
+  margin-top: 5px;
+}
+.exercise {
+  position: absolute;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 0px;
+}
+.notes {
+  margin-bottom: 0px;
+}
+.weight-sets-reps {
+  color: #555;
+  margin-bottom: 0px;
+}
+.del-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.btn {
+  position: relative;
+  margin-left: auto;
+  padding: 1px 8px;
+}
