@@ -4,7 +4,7 @@ import '../styles/DisplayLogsInRange.css';
 const DisplayLogsInRange = () => {
   //date display options
   const dateOptions = {
-    month: 'long',
+    month: 'short',
     year: 'numeric',
     day: 'numeric',
   };
@@ -73,7 +73,7 @@ const DisplayLogsInRange = () => {
         {Object.keys(sortedFilteredData).map((date) => (
           <div key={date} className="workout-card">
             <h4 className="date">
-              {new Date(date).toLocaleString('en-us', dateOptions)}
+              {new Date(date + 'T00:00').toLocaleString('en-us', dateOptions)}
             </h4>
             {sortedFilteredData[date].map((workout, index) => (
               <div key={index}>
