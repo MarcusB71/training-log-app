@@ -8,11 +8,14 @@
 }
 .formH2 {
   padding: 25px;
-  font-size: 2rem;
-  font-weight: 600;
+  font-size: 2.1rem;
+  font-weight: 800;
 }
 .returnSubmit {
   margin-bottom: 20px;
+}
+.form-label {
+  color: rgb(57, 57, 57);
 }
 form {
   margin-top: 20px;
