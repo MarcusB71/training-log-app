@@ -28,8 +28,8 @@ const ExerciseForm = () => {
   const initialFormData = {
     exercise: '',
     weight: '',
-    sets: 0,
-    reps: 0,
+    sets: 1,
+    reps: 1,
     notes: '',
   };
   //DISPLAY HOOKS
@@ -133,10 +133,7 @@ const ExerciseForm = () => {
         {showForm && (
           <div>
             <div className="row justify-content-center">
-              <div
-                className="col-3"
-                style={{ minWidth: '300px', maxWidth: '375px' }}
-              >
+              <div className="col-3 form-container">
                 <form onSubmit={handleSubmit}>
                   <p
                     style={{
@@ -147,7 +144,7 @@ const ExerciseForm = () => {
                   >
                     {date.toLocaleString('en-US', dateOptions)}
                   </p>
-                  <div className="form-group mb-3">
+                  <div className="form-group mb-2">
                     <label
                       className="form-label"
                       style={{ display: 'block', padding: '7px 0px 0px 0px' }}
@@ -156,7 +153,7 @@ const ExerciseForm = () => {
                       Exercise:
                     </label>
                     <select
-                      style={{ maxWidth: '200px' }}
+                      style={{ maxWidth: '200px', fontSize: '16px' }}
                       className="form-select-sm"
                       id="exercise"
                       name="exercise"
@@ -188,7 +185,7 @@ const ExerciseForm = () => {
                       </button>
                     </div>
                   </div>
-                  <div className="form-group mb-3">
+                  <div className="form-group mb-2">
                     <label
                       className="form-label"
                       style={{ display: 'block' }}
@@ -201,6 +198,7 @@ const ExerciseForm = () => {
                       style={{
                         border: '1px solid black',
                         width: '30%',
+                        fontSize: '16px',
                       }}
                       type="text"
                       placeholder="lb/kg"
@@ -210,10 +208,10 @@ const ExerciseForm = () => {
                       onChange={handleChange}
                     />
                   </div>
-                  <div className="form-group mb-3">
+                  <div className="form-group mb-0">
                     <label
                       style={{ display: 'block' }}
-                      className="form-label"
+                      className="form-label mb-0"
                       htmlFor="sets"
                     >
                       Sets: {formData.sets}
@@ -221,8 +219,8 @@ const ExerciseForm = () => {
                     <input
                       className="form-range"
                       type="range"
-                      style={{ width: '80%' }}
-                      min={0}
+                      style={{ width: '80%', marginTop: '-20px' }}
+                      min={1}
                       max={10}
                       id="sets"
                       name="sets"
@@ -230,10 +228,10 @@ const ExerciseForm = () => {
                       onChange={handleChange}
                     />
                   </div>
-                  <div className="form-group mb-3">
+                  <div className="form-group mb-0">
                     <label
                       style={{ display: 'block' }}
-                      className="form-label"
+                      className="form-label mb-0"
                       htmlFor="reps"
                     >
                       Reps: {formData.reps}
@@ -241,8 +239,8 @@ const ExerciseForm = () => {
                     <input
                       className="form-range"
                       type="range"
-                      style={{ width: '80%' }}
-                      min={0}
+                      style={{ width: '80%', marginTop: '-20px' }}
+                      min={1}
                       max={20}
                       id="reps"
                       name="reps"
@@ -255,7 +253,12 @@ const ExerciseForm = () => {
                     <textarea
                       type="text"
                       placeholder="Enter notes here..."
-                      style={{ fontSize: '12px', resize: 'none', width: '80%' }}
+                      style={{
+                        fontSize: '16px',
+                        resize: 'none',
+                        width: '80%',
+                        paddingBottom: '0px',
+                      }}
                       className="form-control-lg"
                       id="notes"
                       name="notes"
