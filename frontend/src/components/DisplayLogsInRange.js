@@ -73,12 +73,22 @@ const DisplayLogsInRange = () => {
         {Object.keys(sortedFilteredData).map((date) => (
           <div key={date} className="workout-card">
             <h4 className="date">
-              {new Date(date + 'T00:00').toLocaleString('en-us', dateOptions)}
+              {new Date(
+                new Date(date + 'T00:00:00Z').getTime() -
+                  new Date(date + 'T00:00:00Z').getTimezoneOffset() * 60000
+              ).toLocaleString('en-us', dateOptions)}
             </h4>
             {sortedFilteredData[date].map((workout, index) => (
               <div key={index}>
                 <div className="log-entry">
-                  <p className="exerciseMonthly">
+                  <p
+                    className="exerciseMonthly"
+                    style={{
+                      textOverflow: 'ellipsis',
+                      overflow: 'hidden',
+                      maxWidth: '240px',
+                    }}
+                  >
                     {workout.exercise && workout.exercise}
                   </p>
                   <p className="weight-sets-reps">
