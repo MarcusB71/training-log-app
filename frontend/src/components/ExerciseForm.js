@@ -79,7 +79,6 @@ const ExerciseForm = () => {
       console.error(err);
     }
   };
-
   //FORM HANDLERS
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -88,14 +87,20 @@ const ExerciseForm = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     try {
-      const commonDate = date.toISOString().split('T')[0];
+      const commonDate = date.toLocaleDateString('en-US');
       formData.date = commonDate;
       const existingFormData =
         JSON.parse(localStorage.getItem('formData')) || [];
-      //Main Data Structure for Form Data {key:[{},{}], key:[{}]}
+      //Main Data Structure for Form Data {date:{exercise:[{},{}]},exercise:[{}]}},{exercise:[{}]}}
       const updatedFormData = {
         ...existingFormData,
-        [commonDate]: [...(existingFormData[commonDate] || []), formData],
+        [commonDate]: {
+          ...(existingFormData[commonDate] || {}),
+          [formData.exercise]: [
+            ...(existingFormData[commonDate]?.[formData.exercise] || []),
+            formData,
+          ],
+        },
       };
       localStorage.setItem('formData', JSON.stringify(updatedFormData));
       setFormData(initialFormData);
@@ -137,7 +142,7 @@ const ExerciseForm = () => {
                 <form onSubmit={handleSubmit}>
                   <p
                     style={{
-                      margin: '5px 0px 0px 0px',
+                      margin: '10px 0px 0px 0px',
                       fontSize: '24px',
                       fontWeight: 'bold',
                     }}
@@ -153,7 +158,11 @@ const ExerciseForm = () => {
                       Exercise:
                     </label>
                     <select
-                      style={{ maxWidth: '200px', fontSize: '16px' }}
+                      style={{
+                        maxWidth: '200px',
+                        fontSize: '16px',
+                        padding: '8px',
+                      }}
                       className="form-select-sm"
                       id="exercise"
                       name="exercise"
