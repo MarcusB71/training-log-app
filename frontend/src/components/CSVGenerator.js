@@ -6,12 +6,13 @@ const CSVGenerator = () => {
     const csvData = [];
     const data = JSON.parse(localStorage.getItem('formData')) || [];
 
-    for (const date in data) {
-      if (data.hasOwnProperty(date)) {
-        data[date].forEach((entry) => {
+    Object.keys(data).forEach((date) => {
+      const exercises = data[date];
+      Object.keys(exercises).forEach((exercise) => {
+        exercises[exercise].forEach((entry) => {
           const rowData = {
             Date: date,
-            Exercise: entry.exercise,
+            Exercise: exercise,
             Weight: entry.weight,
             Sets: entry.sets,
             Reps: entry.reps,
@@ -19,8 +20,8 @@ const CSVGenerator = () => {
           };
           csvData.push(rowData);
         });
-      }
-    }
+      });
+    });
     const csv = papa.unparse(csvData);
     const blob = new Blob([csv], { type: 'text/csv' });
     const url = URL.createObjectURL(blob);
