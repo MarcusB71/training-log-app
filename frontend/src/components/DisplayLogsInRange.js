@@ -17,11 +17,12 @@ const DisplayLogsInRange = () => {
   const filterDataByDateRange = () => {
     setDisplayH1(true);
     const formData = JSON.parse(localStorage.getItem('formData')) || [];
-    const commonStartDate = startDate.toISOString().split('T')[0];
-    const commonEndDate = endDate.toISOString().split('T')[0];
+    startDate.setHours(0, 0, 0, 0);
+    endDate.setHours(23, 59, 59, 999);
     const filteredData = {};
     for (const date in formData) {
-      if (date >= commonStartDate && date <= commonEndDate) {
+      const currentDate = new Date(date);
+      if (currentDate >= startDate && currentDate <= endDate) {
         filteredData[date] = formData[date];
       }
     }
@@ -37,6 +38,7 @@ const DisplayLogsInRange = () => {
       sortedFilteredData[date] = filteredData[date];
     }
     setSortedFilteredData(sortedFilteredData);
+    console.log(sortedFilteredData);
   };
 
   return (
@@ -49,6 +51,7 @@ const DisplayLogsInRange = () => {
         endDate={endDate}
         maxDate={endDate}
         popperPlacement="top"
+        type="button"
       />
       <DatePicker
         selected={endDate}
@@ -58,6 +61,7 @@ const DisplayLogsInRange = () => {
         endDate={endDate}
         minDate={startDate}
         popperPlacement="top"
+        type="button"
       />
       <button
         className="btn btn-light"
@@ -73,35 +77,46 @@ const DisplayLogsInRange = () => {
         {Object.keys(sortedFilteredData).map((date) => (
           <div key={date} className="workout-card">
             <h4 className="date">
-              {new Date(
-                new Date(date + 'T00:00:00Z').getTime() -
-                  new Date(date + 'T00:00:00Z').getTimezoneOffset() * 60000
-              ).toLocaleString('en-us', dateOptions)}
+              {new Date(date).toLocaleString('en-us', dateOptions)}
             </h4>
-            {sortedFilteredData[date].map((workout, index) => (
-              <div key={index}>
-                <div className="log-entry">
+            {Object.entries(sortedFilteredData[date]).map(
+              ([exercise, setInfoArr]) => (
+                <div key={exercise} className="log-entry">
                   <p
                     className="exerciseMonthly"
                     style={{
+                      fontWeight: 'bold',
+                      color: '#333',
                       textOverflow: 'ellipsis',
                       overflow: 'hidden',
-                      maxWidth: '240px',
+                      maxWidth: 'inherit',
                     }}
                   >
-                    {workout.exercise && workout.exercise}
+                    {exercise}
                   </p>
-                  <p className="weight-sets-reps">
-                    {workout.sets && workout.sets}
-                    {' x '}
-                    {workout.reps && workout.reps}
-
-                    {workout.weight && ` @ ${workout.weight} lb`}
-                  </p>
-                  {workout.notes && <p className="notes">{workout.notes}</p>}
+                  {setInfoArr.map((setInfo, index) => (
+                    <div key={index}>
+                      <div
+                        className="weight-sets-reps"
+                        style={{ textAlign: 'left' }}
+                      >
+                        <p className=" mb-0">
+                          {setInfo.sets && setInfo.sets}
+                          {'x'}
+                          {setInfo.reps && setInfo.reps}
+                          {setInfo.weight && ` @ ${setInfo.weight} lb`}
+                        </p>
+                      </div>
+                      {setInfo.notes && (
+                        <div style={{ textAlign: 'left' }}>
+                          <p className="notes">{setInfo.notes}</p>{' '}
+                        </div>
+                      )}
+                    </div>
+                  ))}
                 </div>
-              </div>
-            ))}
+              )
+            )}
           </div>
         ))}
       </div>
