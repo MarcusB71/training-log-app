@@ -25,22 +25,24 @@
   margin-top: 5px;
 }
 .exercise {
-  position: absolute;
   font-weight: bold;
   color: #333;
   margin-bottom: 0px;
 }
-.notes {
-  margin-bottom: 0px;
-}
 .weight-sets-reps {
-  color: #555;
+  margin: 0px 0px 0px 20px;
   margin-bottom: 0px;
+  margin-top: 0px;
 }
 .del-container {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+.notes {
+  color: #555;
+  margin: -2px 15px 0px 25px;
+  font-size: 14px;
 }
 .btn {
   position: relative;

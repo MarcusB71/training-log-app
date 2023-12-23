@@ -13,8 +13,8 @@
 }
 .exerciseMonthly {
   margin: 0px;
+  text-align: center;
 }
-
 .react-datepicker-popper {
   position: inherit;
 }
