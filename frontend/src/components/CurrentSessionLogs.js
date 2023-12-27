@@ -41,7 +41,6 @@ const CurrentSessionLogs = (curDate) => {
       delete updatedFormData[date];
     }
     localStorage.setItem('formData', JSON.stringify(updatedFormData));
-    setFormDataArray(updatedFormData);
     setRunEffect(new Date());
   };
   return (
