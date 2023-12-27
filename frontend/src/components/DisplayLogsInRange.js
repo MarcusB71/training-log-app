@@ -28,7 +28,6 @@ const DisplayLogsInRange = () => {
     }
     sortDataByDate(filteredData);
   };
-
   const sortDataByDate = (filteredData) => {
     const sortedData = Object.keys(filteredData).sort((a, b) =>
       a.localeCompare(b)
@@ -38,30 +37,21 @@ const DisplayLogsInRange = () => {
       sortedFilteredData[date] = filteredData[date];
     }
     setSortedFilteredData(sortedFilteredData);
-    console.log(sortedFilteredData);
   };
-
+  const onCalChange = (dates) => {
+    const [start, end] = dates;
+    setStartDate(start);
+    setEndDate(end);
+  };
   return (
     <div>
       <DatePicker
         selected={startDate}
-        onChange={(date) => setStartDate(date)}
-        selectsStart
+        onChange={onCalChange}
+        inline
+        selectsRange
         startDate={startDate}
         endDate={endDate}
-        maxDate={endDate}
-        popperPlacement="top"
-        type="button"
-      />
-      <DatePicker
-        selected={endDate}
-        onChange={(date) => setEndDate(date)}
-        selectsEnd
-        startDate={startDate}
-        endDate={endDate}
-        minDate={startDate}
-        popperPlacement="top"
-        type="button"
       />
       <button
         className="btn btn-light"
