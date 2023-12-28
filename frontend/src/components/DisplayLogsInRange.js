@@ -17,12 +17,14 @@ const DisplayLogsInRange = () => {
   const filterDataByDateRange = () => {
     setDisplayH1(true);
     const formData = JSON.parse(localStorage.getItem('formData')) || [];
-    startDate.setHours(0, 0, 0, 0);
-    endDate.setHours(23, 59, 59, 999);
+    const clonedStartDate = new Date(startDate);
+    const clonedEndDate = new Date(endDate);
+    clonedStartDate.setHours(0, 0, 0, 0);
+    clonedEndDate.setHours(23, 59, 59, 999);
     const filteredData = {};
     for (const date in formData) {
       const currentDate = new Date(date);
-      if (currentDate >= startDate && currentDate <= endDate) {
+      if (currentDate >= clonedStartDate && currentDate <= clonedEndDate) {
         filteredData[date] = formData[date];
       }
     }
