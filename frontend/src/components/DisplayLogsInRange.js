@@ -47,6 +47,7 @@ const DisplayLogsInRange = () => {
   };
   return (
     <div>
+      <h2 className="formH2">Select Date Range</h2>
       <DatePicker
         selected={startDate}
         onChange={onCalChange}
