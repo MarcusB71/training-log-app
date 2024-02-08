@@ -1,14 +1,13 @@
 .container {
   /* background-color: var(--light); */
   background-color: var(--medBlue);
-  padding: 40px;
+  padding: 50px 1px 50px 1px;
   text-align: center;
   max-width: 100vw;
   height: 100%;
 }
-.formH2 {
-  padding: 25px;
-  font-size: 2.1rem;
+.formH1 {
+  padding: 15px;
   font-weight: 700;
   padding-top: 0px;
 }
@@ -38,12 +37,14 @@
 input[type='range'] {
   padding: 30px;
 }
-form {
+.exercise-form {
   margin-top: 20px;
-  /* background: #bccad6; */
   background-color: var(--light);
-  /* background-color: var(--medBlue); */
   border: 1px solid black;
   border-radius: 2%;
   box-shadow: 4px 5px 5px grey;
+}
+.row {
+  margin-right: 0;
+  margin-left: 0;
 }
