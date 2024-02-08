@@ -47,7 +47,7 @@ const DisplayLogsInRange = () => {
   };
   return (
     <div>
-      <h2 className="formH2">Select Date Range</h2>
+      <h1 className="formH1">Select Date Range</h1>
       <DatePicker
         selected={startDate}
         onChange={onCalChange}
@@ -58,7 +58,7 @@ const DisplayLogsInRange = () => {
       />
       <button
         className="btn btn-light"
-        style={{ margin: '10px 0px 15px 0px' }}
+        style={{ margin: '5px 0px 15px 0px' }}
         onClick={() => {
           filterDataByDateRange();
         }}

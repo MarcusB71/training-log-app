@@ -124,13 +124,19 @@ const ExerciseForm = () => {
       <div className="container text-center">
         {displayCal && (
           <div className="calendarContainer">
-            <h2 className="formH2">Todays Workout</h2>
+            <h1 className="formH1">Todays Workout</h1>
             <DatePicker
               selected={date}
               onChange={(datePicked) => setDate(datePicked)}
               inline
             />
-            <button className="btn btn-light" onClick={handleConfirm}>
+            <button
+              className="btn btn-light"
+              onClick={handleConfirm}
+              style={{
+                marginTop: '5px',
+              }}
+            >
               Confirm
             </button>
           </div>
@@ -139,7 +145,7 @@ const ExerciseForm = () => {
           <div>
             <div className="row justify-content-center">
               <div className="col-3 form-container">
-                <form onSubmit={handleSubmit}>
+                <form className="exercise-form" onSubmit={handleSubmit}>
                   <p
                     style={{
                       margin: '10px 0px 0px 0px',
