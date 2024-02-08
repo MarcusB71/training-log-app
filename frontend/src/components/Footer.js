@@ -42,7 +42,9 @@ const Footer = () => {
               PowerTrackr <i className="fab fa-typo3"></i>
             </Link>
           </div>
-          <small className="website-rights">PowerTrackr ⓒ 2023</small>
+          <small className="website-rights">
+            PowerTrackr ⓒ {new Date().getFullYear()}
+          </small>
           <div className="social-icons">
             <Link
               className="social-icon-link facebook"
