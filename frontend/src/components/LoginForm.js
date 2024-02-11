@@ -54,10 +54,13 @@ export default function SignIn() {
 
     try {
       //currently hard coded post
-      const response = await axios.post('http://localhost:8080/login', {
-        email,
-        password,
-      });
+      const response = await axios.post(
+        'https://training-log-app-backend.onrender.com/login',
+        {
+          email,
+          password,
+        }
+      );
       localStorage.setItem('userEmail', email);
 
       const token = response.data.token;

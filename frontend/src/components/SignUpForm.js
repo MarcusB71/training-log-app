@@ -52,10 +52,13 @@ export default function SignUp() {
     });
     try {
       //currently hard coded post
-      const response = await axios.post('http://localhost:8080/signup', {
-        email,
-        password,
-      });
+      const response = await axios.post(
+        'https://training-log-app-backend.onrender.com/signup',
+        {
+          email,
+          password,
+        }
+      );
       console.log(response);
       if (response.status >= 200 && response.status < 300) {
         notifySuccess();
