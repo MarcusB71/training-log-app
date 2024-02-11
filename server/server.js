@@ -3,8 +3,8 @@ const cors = require('cors');
 const path = require('path');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
-const authMiddleware = require('./middleware/authMiddleware');
-const userRoutes = require('./routes/userRoutes');
+const authMiddleware = require('./src/middleware/authMiddleware');
+const userRoutes = require('./src/routes/userRoutes');
 require('dotenv').config();
 
 const app = express();
